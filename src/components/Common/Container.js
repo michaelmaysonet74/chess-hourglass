@@ -1,14 +1,16 @@
 import React from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
+import { isIphoneX, isIphonePlus, isIphoneSE } from './../../util';
+
+const padding = isIphoneSE() ? 18 : 10;
 
 const styles = StyleSheet.create({
   ContainerStyle: {
-    // backgroundColor: '#2B2B2B',
-    backgroundColor: '#1B1B1B',
+    backgroundColor: '#000000',
     flex: 1,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 90,
+    paddingLeft: isIphonePlus() ? 30 : padding,
+    paddingRight: isIphonePlus() ? 30 : padding,
+    paddingTop: isIphoneX() ? 90 : 50,
   },
 })
 

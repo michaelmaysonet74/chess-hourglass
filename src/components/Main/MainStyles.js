@@ -1,4 +1,5 @@
 import  { StyleSheet } from 'react-native';
+import { isIphoneX, isIphonePlus } from './../../util';
 
 const mainStyles = StyleSheet.create({
   mainTitleStyle: {
@@ -8,9 +9,8 @@ const mainStyles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   mainButtonContainerStyle: {
-    // marginBottom: 4,
     marginBottom: 5,
-    marginTop: 65,
+    marginTop: isIphoneX() || isIphonePlus() ? 65 : 45,
   },
 });
 

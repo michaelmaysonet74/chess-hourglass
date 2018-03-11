@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { isIphoneSE } from './../../util';
 
 import { NavButton } from './NavButton';
 
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
   headerTitleStyle: {
     alignSelf: 'center',
     color: 'white',
-    fontSize: 32,
+    fontSize: isIphoneSE() ? (32 * .8) : 32,
     fontWeight: 'bold',
   },
 });
@@ -24,16 +25,22 @@ const renderBackButton = (showBackButton) => {
   }
 };
 
-const NavHeader = ({ marginLeft, title, showBackButton = true }) => {
+const NavHeader = ({
+  marginBottom = 0,
+  marginLeft = 0,
+  title,
+  showBackButton = true
+}) => {
+
   return (
-    <View style={styles.headerContainerStyle}>
+    <View style={[styles.headerContainerStyle, {marginBottom}]}>
       {renderBackButton(showBackButton)}
       <Text
         style={
           [
             styles.headerTitleStyle,
             {
-              marginLeft: marginLeft
+              marginLeft
             }
           ]
         }
