@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import { Button, Container, NavHeader } from './../Common';
+import CustomSetupCard from './CustomSetupCard';
 import styles from './CustomSetupStyles';
 
 const MARGIN_LEFT = 14;
@@ -18,18 +19,24 @@ class CustomSetup extends Component {
 
   render() {
     return (
-      <Container>
-        <NavHeader
-          title="Custom Setup"
-          marginLeft={MARGIN_LEFT}
-        />
+	  	<Container>
+				<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+					<View>
+						<NavHeader
+							title="Custom Setup"
+							marginLeft={MARGIN_LEFT}
+						/>
 
-        <View style={styles.buttonContainerStyle}>
-          <Button onPress={this.handleOnPress}>
-            Start
-          </Button>
-        </View>
-      </Container>
+						<CustomSetupCard />
+
+		        <View style={styles.buttonContainerStyle}>
+		          <Button onPress={this.handleOnPress}>
+		            Start
+		          </Button>
+		        </View>
+					</View>
+				</TouchableWithoutFeedback>
+	    </Container>
     );
   }
 }
