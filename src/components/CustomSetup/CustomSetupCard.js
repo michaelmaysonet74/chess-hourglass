@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Input } from './../Common';
 import styles from './CustomSetupStyles';
 
-import { correctMinsAndSecs } from '../../util';
+import { correctHours, correctMinsAndSecs } from '../../util';
 import { setCustomHours, setCustomMins, setCustomSecs } from '../../actions';
 
 class CustomSetupCard extends Component {
@@ -15,7 +15,9 @@ class CustomSetupCard extends Component {
 				<Input
 					placeholder="hr"
           value={ this.props.hr }
-          onChangeText={ (text) => this.props.setCustomHours(text) }
+          onChangeText={
+            (text) => this.props.setCustomHours(correctHours(text))
+          }
 				/>
 
         <Text style={styles.customCardTextStyle}>
