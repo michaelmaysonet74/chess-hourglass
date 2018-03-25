@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { StatusBar, Text, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
 import { Button, Container, NavHeader } from './../Common';
 import styles from './MainStyles';
+import { setInitialTime } from '../../actions';
 
 class Main extends Component {
   render() {
@@ -20,6 +22,7 @@ class Main extends Component {
                 title: 'Fast Match',
                 marginLeft: 40,
               });
+              this.props.setInitialTime('5 : 00');
             }}
           >
             Fast Match
@@ -33,6 +36,7 @@ class Main extends Component {
                 title: 'Semi-Fast Match',
                 marginLeft: 7,
               });
+              this.props.setInitialTime('10 : 00');
             }}
           >
             Semi-Fast Match
@@ -49,4 +53,4 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default connect(null, { setInitialTime })(Main);

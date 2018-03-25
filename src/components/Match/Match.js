@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 import CounterCard from './CounterCard';
 import Dock from './Dock';
@@ -22,5 +21,4 @@ class Match extends Component {
   }
 }
 
-// export default connect()(Match);
 export default Match;

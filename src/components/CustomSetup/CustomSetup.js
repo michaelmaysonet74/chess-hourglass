@@ -7,14 +7,31 @@ import { Button, Container, NavHeader } from './../Common';
 import CustomSetupCard from './CustomSetupCard';
 import styles from './CustomSetupStyles';
 
+import { createCustomInitialTime } from '../../util';
+import {
+  setCustomHours,
+  setCustomMins,
+  setCustomSecs,
+  setInitialTime,
+} from '../../actions';
+
 const MARGIN_LEFT = 14;
 
 class CustomSetup extends Component {
+  componentWillMount() {
+    this.props.setCustomHours('');
+    this.props.setCustomMins('');
+    this.props.setCustomSecs('');
+  }
+
   handleOnPress = () => {
     Actions.match({
       title: 'Custom Match',
       marginLeft: MARGIN_LEFT,
     });
+    this.props.setInitialTime(
+      createCustomInitialTime(this.props)
+    );
   }
 
   render() {
@@ -41,5 +58,15 @@ class CustomSetup extends Component {
   }
 }
 
-// export default connect()(CustomSetup);
-export default CustomSetup;
+const mapStateToProps = (state) => {
+  return { hr, min, sec } = state.customSetup;
+};
+
+export default connect(mapStateToProps,
+  {
+    setInitialTime,
+    setCustomHours,
+    setCustomMins,
+    setCustomSecs,
+  }
+)(CustomSetup);

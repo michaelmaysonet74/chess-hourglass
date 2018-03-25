@@ -26,9 +26,9 @@ const Input = (
   {
     keyboardType = 'number-pad',
     maxLength = 2,
-    placeholder = ''
-    onChangeText
-    value
+    placeholder = '',
+    onChangeText,
+    value,
   }
 ) => {
   return (

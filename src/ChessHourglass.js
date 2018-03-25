@@ -4,14 +4,14 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import Router from './Router';
-// import reducers from './reducers';
-// <Provider store={createStore(reducers)}>
-// </Provider>
+import reducers from './reducers';
 
 const ChessHourglass = () => {
     return (
-      <Router />
+      <Provider store={ createStore(reducers) }>
+          <Router />
+      </Provider>
     );
-}
+};
 
 export default ChessHourglass;

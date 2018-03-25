@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
+import { connect } from 'react-redux';
 
 import { Input } from './../Common';
 import styles from './CustomSetupStyles';
+
+import { correctMinsAndSecs } from '../../util';
+import { setCustomHours, setCustomMins, setCustomSecs } from '../../actions';
 
 class CustomSetupCard extends Component {
   render() {
@@ -10,6 +14,8 @@ class CustomSetupCard extends Component {
       <View style={styles.customCardStyle}>
 				<Input
 					placeholder="hr"
+          value={ this.props.hr }
+          onChangeText={ (text) => this.props.setCustomHours(text) }
 				/>
 
         <Text style={styles.customCardTextStyle}>
@@ -18,6 +24,10 @@ class CustomSetupCard extends Component {
 
 				<Input
 					placeholder="min"
+          value={ this.props.min }
+          onChangeText={
+            (text) => this.props.setCustomMins(correctMinsAndSecs(text))
+          }
 				/>
 
         <Text style={styles.customCardTextStyle}>
@@ -26,10 +36,24 @@ class CustomSetupCard extends Component {
 
 				<Input
 					placeholder="sec"
+          value={ this.props.sec }
+          onChangeText={
+            (text) => this.props.setCustomSecs(correctMinsAndSecs(text))
+          }
 				/>
       </View>
     );
   }
 };
 
-export default CustomSetupCard;
+const mapStateToProps = (state) => {
+  return { hr, min, sec } = state.customSetup;
+};
+
+export default connect(mapStateToProps,
+  {
+    setCustomHours,
+    setCustomMins,
+    setCustomSecs
+  }
+)(CustomSetupCard);
