@@ -3,15 +3,17 @@ import { View } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-import Router from './Router';
 import reducers from './reducers';
+import Router from './Router';
+
+const store = createStore(reducers);
 
 const ChessHourglass = () => {
     return (
-      <Provider store={ createStore(reducers) }>
+      <Provider store={store}>
           <Router />
       </Provider>
     );
 };
 
-export default ChessHourglass;
+export { ChessHourglass, store };

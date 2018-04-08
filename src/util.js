@@ -9,7 +9,6 @@ const IPHONE_SE_WIDTH = 320;
 const ONE_SECOND = 1000;
 
 const isIphonePlus = () => width === IPHONE_PLUS_WIDTH;
-
 const isIphoneSE = () => width === IPHONE_SE_WIDTH;
 
 const createCustomInitialTime = (args) => {
@@ -49,21 +48,44 @@ const correctMinsAndSecs = (text) => parseInt(text) > 59 ? '59' : text;
 let timer;
 const stopTimer = (timer) => clearInterval(timer);
 
+function startTimer(time, fn) {
+  const m = moment(time, 'mm:ss');
+
+  timer = setInterval(() => {
+      m.subtract(1, 'seconds');
+
+      fn(`${m.get('minutes')} : ${m.get('seconds')}`);
+
+      if (m.get('minutes') === 0 && m.get('seconds') === 0
+      ) {
+        stopTimer(timer);
+      }
+
+   }, ONE_SECOND);
+
+  return timer;
+}
+
 function startCustomTimer(time, fn) {
- const m = moment(time, 'hh:mm:ss');
- timer = setInterval(() => {
-     m.subtract(1, 'seconds');
+  const m = moment(time, 'hh:mm:ss');
 
-     fn(m.get('hour'), m.get('minutes'), m.get('minutes'));
+  timer = setInterval(() => {
+      m.subtract(1, 'seconds');
 
-     if (m.get('hour') === 0 && m.get('minutes') === 0 && m.get('minutes') === 0) {
-       stopTimer(timer);
-     }
+      fn(m.get('hour'), m.get('minutes'), m.get('seconds'));
 
-  }, ONE_SECOND);
+      if (
+        m.get('hour') === 0
+        && m.get('minutes') === 0
+        && m.get('seconds') === 0
+      ) {
+        stopTimer(timer);
+      }
 
- return timer;
-};
+   }, ONE_SECOND);
+
+  return timer;
+}
 
 export {
   isIphoneX,
@@ -71,4 +93,7 @@ export {
   isIphoneSE,
   createCustomInitialTime,
   correctMinsAndSecs,
+  startTimer,
+  startCustomTimer,
+  stopTimer,
 };

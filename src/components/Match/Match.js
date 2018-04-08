@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import CounterCard from './CounterCard';
 import Dock from './Dock';
 import { Container, NavHeader } from './../Common';
+
+import Timer from '../../models/Timer.js';
 
 class Match extends Component {
   render() {
@@ -13,12 +16,21 @@ class Match extends Component {
           marginBottom={10}
           marginLeft={this.props.marginLeft}
         />
-        <CounterCard />
-        <CounterCard isWhite />
+        <CounterCard
+          timer={this.props.blackTimer}
+        />
+        <CounterCard
+          timer={this.props.whiteTimer}
+          isWhite
+        />
         <Dock />
       </Container>
     );
   }
 }
 
-export default Match;
+const mapStateToProps = (state) => {
+  return { blackTimer, whiteTimer } = state.match;
+};
+
+export default connect(mapStateToProps)(Match);

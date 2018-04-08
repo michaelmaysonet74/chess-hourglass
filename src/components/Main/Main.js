@@ -43,11 +43,11 @@ class Main extends Component {
           </Button>
         </View>
 
-        <View style={styles.mainButtonContainerStyle}>
+        {/* <View style={styles.mainButtonContainerStyle}>
             <Button onPress={() => Actions.setup()}>
               Custom Match
             </Button>
-        </View>
+        </View> */}
       </Container>
     );
   }

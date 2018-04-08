@@ -3,43 +3,23 @@ import {
   PAUSE_TIMER,
   RESTART_TIMER,
   SET_INITIAL_TIME,
+  SET_BLACK_RUNNING_TIME,
+  SET_WHITE_RUNNING_TIME,
   SET_BLACK_PRESSED,
   SET_WHITE_PRESSED,
 } from './types';
 
-export const startTimer = () => {
-  return {
-    type: START_TIMER,
-  };
-};
+function createAction(type, payload) {
+  return { type, payload };
+}
 
-export const pauseTimer = () => {
-  return {
-    type: PAUSE_TIMER,
-  };
-};
+export const startTimer       = () => createAction(START_TIMER);
+export const pauseTimer       = () => createAction(PAUSE_TIMER);
+export const restartTimer     = () => createAction(RESTART_TIMER);
 
-export const restartTimer = () => {
-  return {
-    type: RESTART_TIMER,
-  };
-};
+export const setBlackPressed  = () => createAction(SET_BLACK_PRESSED);
+export const setWhitePressed  = () => createAction(SET_WHITE_PRESSED);
 
-export const setInitialTime = (time) => {
-  return {
-    type: SET_INITIAL_TIME,
-    payload: time,
-  };
-};
-
-export const setBlackPressed = () => {
-  return {
-    type: SET_BLACK_PRESSED
-  };
-};
-
-export const setWhitePressed = () => {
-  return {
-    type: SET_WHITE_PRESSED
-  };
-};
+export const setInitialTime   = (time) => createAction(SET_INITIAL_TIME, time);
+export const updateBlackTimer = (time) => createAction(SET_BLACK_RUNNING_TIME, time);
+export const updateWhiteTimer = (time) => createAction(SET_WHITE_RUNNING_TIME, time);

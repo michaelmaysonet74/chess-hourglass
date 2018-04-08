@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Counter from './Counter';
 import styles from './MatchStyles';
 import { setBlackPressed, setWhitePressed } from '../../actions';
+import { startCustomTimer, stopTimer } from '../../util';
 
 class CounterCard extends Component {
   blackStyle = {
@@ -23,6 +24,8 @@ class CounterCard extends Component {
   };
 
   getAction = () => {
+    const doNothing =  () => {};
+
     if (
       this.props.paused
       || (
@@ -31,20 +34,23 @@ class CounterCard extends Component {
         && !this.props.whitePressed
       )
     ) {
-      return () => {};
+      return doNothing;
     }
 
     if (this.props.isWhite) {
+
       if (!this.props.whitePressed) {
           return this.props.setWhitePressed;
       } else {
-        return () => {};
+          return doNothing;
       }
+
     } else {
+
       if (!this.props.blackPressed) {
         return this.props.setBlackPressed;
       } else {
-        return () => {};
+          return doNothing;
       }
     }
   }
@@ -56,15 +62,15 @@ class CounterCard extends Component {
     return this.blackStyle;
   };
 
-  renderTouchableCard = () => {
+  renderTouchableCard = (time) => {
     const {backgroundColor, color, transform} = this.getStyle();
     const action = this.getAction();
 
     return (
-      <TouchableOpacity onPress={() => action()}>
+      <TouchableOpacity onPress={() => action() }>
         <View style={[styles.counterCardStyle, {backgroundColor}]}>
           <Counter
-            time={this.props.initialTime}
+            time={time}
             style={[styles.counterCardTextStyle, {color, transform}]}
           />
         </View>
@@ -73,14 +79,13 @@ class CounterCard extends Component {
   };
 
   render() {
-    return this.renderTouchableCard();
+    return this.renderTouchableCard(this.props.timer.currentTime);
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     paused,
-    initialTime,
     blackPressed,
     whitePressed
   } = state.match;
