@@ -48,31 +48,27 @@ const correctMinsAndSecs = (text) => parseInt(text) > 59 ? '59' : text;
 let timer;
 const stopTimer = (timer) => clearInterval(timer);
 
-function startTimer(time, fn) {
-  const m = moment(time, 'mm:ss');
-
+function createCustomTimer(m, fn) {
   timer = setInterval(() => {
       m.subtract(1, 'seconds');
 
-      fn(`${m.get('minutes')} : ${m.get('seconds')}`);
+      let hr = m.get('hour');
+      let min = m.get('minutes');
+      let sec = m.get('seconds');
 
-      if (m.get('minutes') === 0 && m.get('seconds') === 0
-      ) {
-        stopTimer(timer);
+      if (hr === 0) {
+        hr = '0' + hr;
       }
 
-   }, ONE_SECOND);
+      if (min.toString().length === 1) {
+        min = '0' + min;
+      }
 
-  return timer;
-}
+      if (sec.toString().length === 1) {
+        sec = '0' + sec;
+      }
 
-function startCustomTimer(time, fn) {
-  const m = moment(time, 'hh:mm:ss');
-
-  timer = setInterval(() => {
-      m.subtract(1, 'seconds');
-
-      fn(m.get('hour'), m.get('minutes'), m.get('seconds'));
+      fn(`${hr} : ${min} : ${sec}`);
 
       if (
         m.get('hour') === 0
@@ -87,13 +83,48 @@ function startCustomTimer(time, fn) {
   return timer;
 }
 
+function startTimer(time, fn) {
+  let m = moment(time, 'hh:mm:ss');
+
+  if (time.trim().match(/^[0-9]{1,2}[ ]*:[ ]*[0-9]{1,2}$/)) {
+    m = moment(time, 'mm:ss');
+
+    timer = setInterval(() => {
+        m.subtract(1, 'seconds');
+
+        let min = m.get('minutes');
+        let sec = m.get('seconds');
+
+        if (min === 0) {
+          min = '0' + min;
+        }
+
+        if (sec.toString().length === 1) {
+          sec = '0' + sec;
+        }
+
+        fn(`${min} : ${sec}`);
+
+        if (m.get('minutes') === 0 && m.get('seconds') === 0) {
+          stopTimer(timer);
+        }
+
+     }, ONE_SECOND);
+  } else {
+
+    timer = createCustomTimer(m, fn);
+  }
+
+  return timer;
+}
+
 export {
   isIphoneX,
   isIphonePlus,
   isIphoneSE,
   createCustomInitialTime,
+  correctHours,
   correctMinsAndSecs,
   startTimer,
-  startCustomTimer,
   stopTimer,
 };
