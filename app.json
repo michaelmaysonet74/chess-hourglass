@@ -12,7 +12,7 @@
     "splash": {
       "image": "./assets/chess-hourglass-splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#2B2B2B"
     },
     "ios": {
       "supportsTablet": false
