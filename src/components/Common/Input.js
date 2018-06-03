@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
+import { isIphoneSE } from './../../util';
 
 const styles = StyleSheet.create({
   containerStyle: {
@@ -15,7 +16,7 @@ const styles = StyleSheet.create({
 	},
 	inputStyle: {
     color: '#454545',
-    fontSize: 50,
+    fontSize: isIphoneSE() ? 30 : 50,
     fontWeight: 'bold',
 		flex: 1,
 		textAlign: 'center'
