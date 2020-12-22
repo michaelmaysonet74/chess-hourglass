@@ -1,21 +1,23 @@
 {
-  "expo": {
-    "name": "chess-hourglass",
-    "description": "",
-    "slug": "chess-hourglass",
-    "privacy": "public",
-    "sdkVersion": "25.0.0",
-    "platforms": ["ios"],
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/chess-hourglass.png",
-    "splash": {
-      "image": "./assets/chess-hourglass-splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#2B2B2B"
-    },
-    "ios": {
-      "supportsTablet": false
+    "expo": {
+        "name": "chess-hourglass",
+        "description": "",
+        "slug": "chess-hourglass",
+        "privacy": "public",
+        "sdkVersion": "25.0.0",
+        "platforms": [
+            "ios"
+        ],
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/chess-hourglass.png",
+        "splash": {
+            "image": "./assets/chess-hourglass-splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#2B2B2B"
+        },
+        "ios": {
+            "supportsTablet": false
+        }
     }
-  }
 }

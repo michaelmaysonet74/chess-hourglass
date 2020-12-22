@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { View } from 'react-native';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
@@ -10,9 +9,9 @@ const store = createStore(reducers);
 
 const ChessHourglass = () => {
     return (
-      <Provider store={store}>
-          <Router />
-      </Provider>
+        <Provider store={store}>
+            <Router />
+        </Provider>
     );
 };
 
